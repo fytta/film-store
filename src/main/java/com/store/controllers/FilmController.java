@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.store.models.Film;
 import com.store.services.FilmService;
 
-@CrossOrigin() // Descomentar para aceptar peticiones *.*.*.*
+@CrossOrigin()
 @RestController
 @RequestMapping("/api/v1")
 public class FilmController {
