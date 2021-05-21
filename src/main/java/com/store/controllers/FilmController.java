@@ -1,19 +1,15 @@
 package com.store.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.google.gson.Gson;
 import com.store.models.Film;
 import com.store.services.FilmService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin()
 @RestController
@@ -68,6 +64,28 @@ public class FilmController {
 
 		return new ResponseEntity<List<Film>>(films, HttpStatus.OK);
 	}
-	
 
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/films/add")
+	public ResponseEntity add(@RequestBody Film film) {
+
+		return new ResponseEntity("Film added!", HttpStatus.CREATED);
+	}
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/films/update")
+	public ResponseEntity update(@RequestBody Film film) {
+
+		System.out.println(film.getDescription());
+		filmService.save(film);
+		return new ResponseEntity("Film "+film.getId()+" updated!", HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/films/delete/{id}")
+	public ResponseEntity delete(@PathVariable("id") int id) {
+
+		filmService.deleteById(id);
+		return new ResponseEntity("Film "+id +" deleted!", HttpStatus.OK);
+	}
 }

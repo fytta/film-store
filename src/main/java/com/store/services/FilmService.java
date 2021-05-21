@@ -1,8 +1,8 @@
 package com.store.services;
 
-import java.util.List;
-
 import com.store.models.Film;
+
+import java.util.List;
 
 public interface FilmService {
 
@@ -13,6 +13,12 @@ public interface FilmService {
 	void delete(Film film);
 	
 	long count();
+
+	void save(Film film);
+
+	boolean existsById(int id);
+
+	void deleteById(int id);
 	
 	List<Object> getNumberFilmsPerYear();
 	

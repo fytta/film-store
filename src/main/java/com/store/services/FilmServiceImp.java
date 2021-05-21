@@ -1,19 +1,18 @@
 package com.store.services;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.google.gson.Gson;
 import com.store.models.Film;
 import com.store.repositories.FilmRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FilmServiceImp implements FilmService{
 	
 	@Autowired
-	FilmRepository filmRepository;
+		FilmRepository filmRepository;
 
 	final static Gson gson = new Gson();
 	
@@ -44,6 +43,21 @@ public class FilmServiceImp implements FilmService{
 	@Override
 	public long count() {
 		return filmRepository.count();
+	}
+
+	@Override
+	public void save(Film film) {
+		filmRepository.save(film);
+	}
+
+	@Override
+	public boolean existsById(int id) {
+		return filmRepository.existsById(id);
+	}
+
+	@Override
+	public void deleteById(int id) {
+		filmRepository.deleteById(id);
 	}
 
 	@Override
