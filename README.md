@@ -1,2 +1,7 @@
 # film-store
-Spring boot, rest service, jpa
+
+Spring boot project
+
+- Rest API
+- MySQL
+- Authentication with JWT (Spring Security)
