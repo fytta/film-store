@@ -68,17 +68,21 @@ public class FilmController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/films/add")
 	public ResponseEntity add(@RequestBody Film film) {
-
-		return new ResponseEntity("Film added!", HttpStatus.CREATED);
+		Film filmToAdd = new Film();
+		filmToAdd.setDescription(film.getDescription());
+		filmToAdd.setStock(film.getStock());
+		filmToAdd.setTitle(film.getTitle());
+		filmToAdd.setReleaseYear(film.getReleaseYear());
+		filmService.save(film);
+		return new ResponseEntity(HttpStatus.CREATED);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/films/update")
 	public ResponseEntity update(@RequestBody Film film) {
 
-		System.out.println(film.getDescription());
 		filmService.save(film);
-		return new ResponseEntity("Film "+film.getId()+" updated!", HttpStatus.OK);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
@@ -86,6 +90,6 @@ public class FilmController {
 	public ResponseEntity delete(@PathVariable("id") int id) {
 
 		filmService.deleteById(id);
-		return new ResponseEntity("Film "+id +" deleted!", HttpStatus.OK);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 }
