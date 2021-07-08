@@ -1,6 +1,6 @@
 # film-store
 
-Spring boot project
+Spring boot 5 project
 
 - Rest API
 - MySQL
